@@ -1,6 +1,8 @@
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
+#include <string.h>
+#include <algorithm>
+#include <assert.h>
+#include <time.h>
 using namespace std;
 
 template <typename T>
