@@ -1,5 +1,6 @@
 #include "../../tools.cpp"
 
+// 对A[left, right]跨越中点mid的最大子数组求和
 int CrossMaxSubArray(int *A, int left, int mid, int right)
 {
     int leftSum = INT_MIN, rightSum = INT_MIN;
@@ -17,6 +18,7 @@ int CrossMaxSubArray(int *A, int left, int mid, int right)
     }
     return leftSum + rightSum;
 }
+// 对数组A的片段A[left, right]进行最大子数组求和
 int MaxSubArray(int *A, int left, int right)
 {
     if (left == right)
