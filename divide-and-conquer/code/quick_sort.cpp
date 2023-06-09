@@ -1,28 +1,35 @@
 #include "../../tools.cpp"
 
+int Partition(int *A, int left, int right)
+{
+    // 随机选取一个数作为基准数
+    int pivot = A[left + rand() % (right - left + 1)];
+    int i = left, j = right;
+    while (i <= j)
+    {
+        while (A[i] < pivot) // 左边找大的
+            i++;
+        while (A[j] > pivot) // 右边找小的
+            j--;
+        if (i <= j)
+        {
+            swap(A[i], A[j]);
+            i++;
+            j--;
+        }
+    }
+    // 此时i=j+1
+    return j;
+}
+
 // 对数组A的片段A[left, right]进行快速排序
 void QucikSort(int *A, int left, int right)
 {
     if (left < right)
     {
-        // 随机选取一个数作为基准数
-        int pivot = A[left + rand() % (right - left + 1)];
-        int i = left, j = right;
-        while (i <= j)
-        {
-            while (A[i] < pivot) // 左边找大的
-                i++;
-            while (A[j] > pivot) // 右边找小的
-                j--;
-            if (i <= j)
-            {
-                swap(A[i], A[j]);
-                i++;
-                j--;
-            }
-        }
-        QucikSort(A, left, j);
-        QucikSort(A, i, right);
+        int p = Partition(A, left, right);
+        QucikSort(A, left, p);
+        QucikSort(A, p + 1, right);
     }
 }
 
