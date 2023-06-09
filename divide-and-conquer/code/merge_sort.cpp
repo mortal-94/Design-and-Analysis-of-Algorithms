@@ -1,5 +1,4 @@
 #include "../../tools.cpp"
-using namespace std;
 
 // 把有序数组片段A[left, mid]和A[mid+1, right]合并成一个整个有序数组片段A[left, right]
 void Merge(int *A, int left, int mid, int right)

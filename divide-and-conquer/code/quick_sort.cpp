@@ -1,5 +1,4 @@
 #include "../../tools.cpp"
-using namespace std;
 
 // 对数组A的片段A[left, right]进行快速排序
 void QucikSort(int *A, int left, int right)
