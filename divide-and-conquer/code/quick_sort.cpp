@@ -6,7 +6,7 @@
 using namespace std;
 
 // 对数组A的片段A[left, right]进行快速排序
-int *QucikSort(int *A, int left, int right)
+void QucikSort(int *A, int left, int right)
 {
     if (left < right)
     {
@@ -29,7 +29,6 @@ int *QucikSort(int *A, int left, int right)
         QucikSort(A, left, j);
         QucikSort(A, i, right);
     }
-    return A;
 }
 
 int main()
@@ -41,8 +40,8 @@ int main()
     cout << "Before sort: ";
     ArrayUtils<int>::printArray(arr, size);
     sort(stdArr, stdArr + size);
-    assert(ArrayUtils<int>::isEqual(QucikSort(arr, 0, size - 1), stdArr, size));
     QucikSort(arr, 0, size - 1);
+    assert(ArrayUtils<int>::isEqual(arr, stdArr, size));
     cout << "After sort: ";
     ArrayUtils<int>::printArray(arr, size);
     delete[] arr, stdArr;
