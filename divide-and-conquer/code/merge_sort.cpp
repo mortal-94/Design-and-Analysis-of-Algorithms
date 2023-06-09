@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string.h>
+#include <algorithm>
+#include <assert.h>
 #include "../../tools.cpp"
 using namespace std;
 
@@ -28,7 +30,7 @@ void Merge(int *A, int left, int mid, int right)
     delete[] R;
 }
 // 对数组A[left, right]进行归并排序
-int *MergeSort(int *A, int left, int right)
+void MergeSort(int *A, int left, int right)
 {
     if (left < right)
     {
@@ -37,22 +39,21 @@ int *MergeSort(int *A, int left, int right)
         MergeSort(A, mid + 1, right);
         Merge(A, left, mid, right);
     }
-    return A;
 }
 
 int main()
 {
-    int maxSize = 15, minValue = 0, maxValue = 100;
-    int *arr = ArrayUtils<int>::generateRandomArray(maxSize, minValue, maxValue);
+    int size = 15, minValue = -100, maxValue = 100;
+    int *arr = ArrayUtils<int>::generateRandomArray(size, minValue, maxValue);
+    int *stdArr = new int[size];
+    memcpy(stdArr, arr, size * sizeof(int));
     cout << "Before sort: ";
-    for (int i = 0; i < maxSize; i++)
-        cout << arr[i] << " ";
-    cout << endl;
-    MergeSort(arr, 0, maxSize - 1);
+    ArrayUtils<int>::printArray(arr, size);
+    MergeSort(arr, 0, size - 1);
+    sort(stdArr, stdArr + size);
+    assert(ArrayUtils<int>::isEqual(arr, stdArr, size));
     cout << "After sort: ";
-    for (int i = 0; i < maxSize; i++)
-        cout << arr[i] << " ";
-    cout << endl;
-    delete[] arr;
+    ArrayUtils<int>::printArray(arr, size);
+    delete[] arr, stdArr;
     return 0;
 }

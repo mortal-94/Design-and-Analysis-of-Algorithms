@@ -28,4 +28,17 @@ public:
         }
         cout << endl;
     }
+
+    // 判断两个数组arr1和arr2的前n个元素是否相等
+    static bool isEqual(T *arr1, T *arr2, int n)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            if (arr1[i] != arr2[i])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 };
