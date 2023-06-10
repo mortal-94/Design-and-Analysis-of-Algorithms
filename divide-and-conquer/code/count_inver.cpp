@@ -45,7 +45,7 @@ int main()
     vector<int> arr = ArrayUtils<int>::generateRandomArray(size, minValue, maxValue);
     cout << "Array: ";
     ArrayUtils<int>::printArray(arr, size);
-    int count = CountInver(arr, 0, size - 1); // TODO 验证结果正确性
+    int count = CountInver(arr, 0, size - 1);
     cout << "Inversion count: " << count << endl;
     cout << "Array: ";
     ArrayUtils<int>::printArray(arr, size);

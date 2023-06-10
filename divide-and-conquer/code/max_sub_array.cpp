@@ -37,6 +37,6 @@ int main()
     cout << "Array: ";
     ArrayUtils<int>::printArray(arr, size);
     int maxSum = MaxSubArray(arr, 0, size - 1);
-    cout << "Max sub array sum: " << maxSum << endl; // TODO 检验答案的正确性
+    cout << "Max sub array sum: " << maxSum << endl;
     return 0;
 }
