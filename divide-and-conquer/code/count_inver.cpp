@@ -1,10 +1,9 @@
 #include "../../tools.cpp"
 
 // 对跨越A[left, right]中点mid的逆序对进行统计，A[left, mid]和A[mid+1, right]已经有序
-int MergeCount(int *A, int left, int mid, int right)
+int MergeCount(vector<int> &A, int left, int mid, int right)
 {
-    int *A1 = new int[right - left + 1];
-    memcpy(A1, A + left, (right - left + 1) * sizeof(int)); // 保留A[left, mid]的副本
+    vector<int> A1(A.begin() + left, A.begin() + right + 1); // A1 = A[left, right]
     // A1[0, right - left] = A[left, right]，即偏移量为left
     int i = 0, j = mid - left + 1, k = 0, count = 0;
     while (i <= mid - left && j <= right - left)
@@ -21,24 +20,13 @@ int MergeCount(int *A, int left, int mid, int right)
             j++, k++;
         }
     }
-    // while (i <= mid - left)
-    // {
-    //     A[left + k] = A1[i];
-    //     i++, k++;
-    // }
-    // while (j <= right - left)
-    // {
-    //     A[left + k] = A1[j];
-    //     j++, k++;
-    // }
-    memcpy(A + left + k, A1 + i, (mid - left - i + 1) * sizeof(int));   // A[left+k, right] = A1[i, mid-left]
-    memcpy(A + left + k, A1 + j, (right - left - j + 1) * sizeof(int)); // A[left+k, right] = A1[j, right-left]
-    delete[] A1;
+    copy(A1.begin() + i, A1.begin() + mid - left + 1, A.begin() + left + k);   // 将A1[i, mid - left]复制到A[left + k, right]
+    copy(A1.begin() + j, A1.begin() + right - left + 1, A.begin() + left + k); // 将A1[j, right - left]复制到A[left + k, right]
     return count;
 }
 
 // 对数组A的片段A[left, right]统计逆序对的个数
-int CountInver(int *A, int left, int right)
+int CountInver(vector<int> &A, int left, int right)
 {
     if (left < right)
     {
@@ -54,13 +42,12 @@ int CountInver(int *A, int left, int right)
 int main()
 {
     int size = 5, minValue = -100, maxValue = 100;
-    int *arr = ArrayUtils<int>::generateRandomArray(size, minValue, maxValue);
+    vector<int> arr = ArrayUtils<int>::generateRandomArray(size, minValue, maxValue);
     cout << "Array: ";
     ArrayUtils<int>::printArray(arr, size);
     int count = CountInver(arr, 0, size - 1); // TODO 验证结果正确性
     cout << "Inversion count: " << count << endl;
     cout << "Array: ";
     ArrayUtils<int>::printArray(arr, size);
-    delete[] arr;
     return 0;
 }

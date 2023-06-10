@@ -1,6 +1,6 @@
 #include "../../tools.cpp"
 
-int Partition(int *A, int left, int right)
+int Partition(vector<int> &A, int left, int right)
 {
     // 随机选取基准元素放到A[right]做为基准元素
     srand(time(NULL));
@@ -22,7 +22,7 @@ int Partition(int *A, int left, int right)
 }
 
 // 对数组A的片段A[left, right]进行快速排序
-void QucikSort(int *A, int left, int right)
+void QucikSort(vector<int> &A, int left, int right)
 {
     if (left < right)
     {
@@ -34,17 +34,14 @@ void QucikSort(int *A, int left, int right)
 
 void check()
 {
-    int num = 100;
-    int size = 15, minValue = -100, maxValue = 100;
+    int num = 500;
+    int minValue = -100, maxValue = 100;
     for (int i = 0; i < num; i++)
     {
-        int *arr = ArrayUtils<int>::generateRandomArray(size, minValue, maxValue);
-        int *stdArr = new int[size];
-        memcpy(stdArr, arr, size * sizeof(int));
-        sort(stdArr, stdArr + size);
+        int size = rand() % 100;
+        vector<int> arr = ArrayUtils<int>::generateRandomArray(size, minValue, maxValue);
         QucikSort(arr, 0, size - 1);
-        assert(ArrayUtils<int>::isEqual(arr, stdArr, size));
-        delete[] arr, stdArr;
+        assert(ArrayUtils<int>::isSorted(arr));
     }
     cout << "Passed!" << endl;
 }
@@ -53,12 +50,11 @@ int main()
 {
     check();
     int size = 15, minValue = -100, maxValue = 100;
-    int *arr = ArrayUtils<int>::generateRandomArray(size, minValue, maxValue);
+    vector<int> arr = ArrayUtils<int>::generateRandomArray(size, minValue, maxValue);
     cout << "Before sort: ";
     ArrayUtils<int>::printArray(arr, size);
     QucikSort(arr, 0, size - 1);
     cout << "After sort: ";
     ArrayUtils<int>::printArray(arr, size);
-    delete[] arr;
     return 0;
 }

@@ -1,7 +1,7 @@
 #include "../../tools.cpp"
 
 // 对A[left, right]跨越中点mid的最大子数组求和
-int CrossMaxSubArray(int *A, int left, int mid, int right)
+int CrossMaxSubArray(vector<int> A, int left, int mid, int right)
 {
     int leftSum = INT_MIN, rightSum = INT_MIN;
     int sum = 0;
@@ -19,7 +19,7 @@ int CrossMaxSubArray(int *A, int left, int mid, int right)
     return leftSum + rightSum;
 }
 // 对数组A的片段A[left, right]进行最大子数组求和
-int MaxSubArray(int *A, int left, int right)
+int MaxSubArray(vector<int> A, int left, int right)
 {
     if (left == right)
         return A[left];
@@ -32,12 +32,11 @@ int MaxSubArray(int *A, int left, int right)
 
 int main()
 {
-    int size = 15, minValue = -100, maxValue = 100;
-    int *arr = ArrayUtils<int>::generateRandomArray(size, minValue, maxValue);
+    int size = 5, minValue = -100, maxValue = 100;
+    vector<int> arr = ArrayUtils<int>::generateRandomArray(size, minValue, maxValue);
     cout << "Array: ";
     ArrayUtils<int>::printArray(arr, size);
     int maxSum = MaxSubArray(arr, 0, size - 1);
     cout << "Max sub array sum: " << maxSum << endl; // TODO 检验答案的正确性
-    delete[] arr;
     return 0;
 }

@@ -1,14 +1,11 @@
 #include "../../tools.cpp"
 
 // 把有序数组片段A[left, mid]和A[mid+1, right]合并成一个整个有序数组片段A[left, right]
-void Merge(int *A, int left, int mid, int right)
+void Merge(vector<int> &A, int left, int mid, int right)
 {
-    int n1 = mid - left + 1; // 左边数组的长度
-    int n2 = right - mid;    // 右边数组的长度
-    int *L = new int[n1];    // 左边数组
-    int *R = new int[n2];    // 右边数组
-    memcpy(L, A + left, n1 * sizeof(int));
-    memcpy(R, A + mid + 1, n2 * sizeof(int));
+    vector<int> L(A.begin() + left, A.begin() + mid + 1);      // 左边数组
+    vector<int> R(A.begin() + mid + 1, A.begin() + right + 1); // 右边数组
+    int n1 = L.size(), n2 = R.size();
     int i = 0, j = 0, k = left;
     while (i < n1 && j < n2)
     {
@@ -17,17 +14,11 @@ void Merge(int *A, int left, int mid, int right)
         else
             A[k++] = R[j++];
     }
-    // while (i < n1)
-    //     A[k++] = L[i++];
-    // while (j < n2)
-    //     A[k++] = R[j++];
-    memcpy(A + k, L + i, (n1 - i) * sizeof(int));
-    memcpy(A + k, R + j, (n2 - j) * sizeof(int));
-    delete[] L;
-    delete[] R;
+    copy(L.begin() + i, L.begin() + n1, A.begin() + k); // 将L[i, n1]复制到A[k, right]
+    copy(R.begin() + j, R.begin() + n2, A.begin() + k); // 将R[j, n2]复制到A[k, right]
 }
 // 对数组A[left, right]进行归并排序
-void MergeSort(int *A, int left, int right)
+void MergeSort(vector<int> &A, int left, int right)
 {
     if (left < right)
     {
@@ -38,19 +29,29 @@ void MergeSort(int *A, int left, int right)
     }
 }
 
+void check()
+{
+    int num = 500;
+    int minValue = -100, maxValue = 100;
+    while (num--)
+    {
+        int size = rand() % 100;
+        vector<int> arr = ArrayUtils<int>::generateRandomArray(size, minValue, maxValue);
+        MergeSort(arr, 0, size - 1);
+        assert(ArrayUtils<int>::isSorted(arr));
+    }
+    cout << "Passed!" << endl;
+}
+
 int main()
 {
+    check();
     int size = 15, minValue = -100, maxValue = 100;
-    int *arr = ArrayUtils<int>::generateRandomArray(size, minValue, maxValue);
-    int *stdArr = new int[size];
-    memcpy(stdArr, arr, size * sizeof(int));
+    vector<int> arr = ArrayUtils<int>::generateRandomArray(size, minValue, maxValue);
     cout << "Before sort: ";
     ArrayUtils<int>::printArray(arr, size);
     MergeSort(arr, 0, size - 1);
-    sort(stdArr, stdArr + size);
-    assert(ArrayUtils<int>::isEqual(arr, stdArr, size));
     cout << "After sort: ";
     ArrayUtils<int>::printArray(arr, size);
-    delete[] arr, stdArr;
     return 0;
 }

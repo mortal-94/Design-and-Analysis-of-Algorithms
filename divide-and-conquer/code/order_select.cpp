@@ -1,6 +1,6 @@
 #include "../../tools.cpp"
 
-int Partition(int *A, int left, int right)
+int Partition(vector<int> &A, int left, int right)
 {
     // 随机选取基准元素放到A[right]做为基准元素
     srand(time(NULL));
@@ -22,7 +22,7 @@ int Partition(int *A, int left, int right)
 }
 
 // 返回数组A[left, right]中第k小的数
-int OrderSlect(int *A, int left, int right, int k)
+int OrderSlect(vector<int> &A, int left, int right, int k)
 {
     int p = Partition(A, left, right);
     if (p - left + 1 == k)
@@ -42,14 +42,13 @@ int OrderSlect(int *A, int left, int right, int k)
 int main()
 {
     int size = 15, minValue = -100, maxValue = 100;
-    int *arr = ArrayUtils<int>::generateRandomArray(size, minValue, maxValue);
+    vector<int> arr = ArrayUtils<int>::generateRandomArray(size, minValue, maxValue);
     cout << "original array: ";
     ArrayUtils<int>::printArray(arr, size);
-    int *stdArr = new int[size];
-    memcpy(stdArr, arr, size * sizeof(int));
+    vector<int> stdArr(arr);
     int k = 5;
     int x = OrderSlect(arr, 0, size - 1, k);
-    sort(stdArr, stdArr + size);
+    sort(stdArr.begin(), stdArr.end());
     cout << "sorted array: ";
     ArrayUtils<int>::printArray(stdArr, size);
     assert(x == stdArr[k - 1]);

@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <assert.h>
 #include <time.h>
+#include <vector>
 using namespace std;
 
 template <typename T>
@@ -10,9 +11,9 @@ class ArrayUtils
 {
 public:
     // 生成长度为n，范围在[low, high]之间的随机数组
-    static T *generateRandomArray(int n, T low, T high)
+    static vector<T> generateRandomArray(int n, T low, T high)
     {
-        T *arr = new T[n];
+        vector<T> arr(n);
         srand(time(NULL));
         for (int i = 0; i < n; i++)
         {
@@ -21,34 +22,42 @@ public:
         return arr;
     }
 
-    // 打印数组arr的前n个元素
-    static void printArray(T *arr, int n)
+    // 打印数组
+    static void printArray(vector<T> arr)
     {
+        for (int i = 0; i < arr.size(); i++)
+        {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
+    // 打印前n个元素
+    static void printArray(vector<T> arr, int n)
+    {
+        assert(n <= arr.size());
         for (int i = 0; i < n; i++)
         {
             cout << arr[i] << " ";
         }
         cout << endl;
     }
-
-    static void print2dArray(T **arr, int n, int m)
+    // 打印二维数组
+    static void print2dArray(vector<vector<T>> arr)
     {
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < arr.size(); i++)
         {
-            printArray(arr[i], m);
+            printArray(arr[i]);
         }
     }
 
-    // 判断两个数组arr1和arr2的前n个元素是否相等
-    static bool isEqual(T *arr1, T *arr2, int n)
+    // 判断数组是否有序
+    static bool isSorted(vector<T> arr)
     {
-        for (int i = 0; i < n; i++)
+        for (int i = 1; i < arr.size(); i++)
         {
-            if (arr1[i] != arr2[i])
-            {
+            if (arr[i - 1] > arr[i])
                 return false;
-            }
         }
         return true;
-    }
+    }    
 };
