@@ -17,10 +17,12 @@ void Merge(int *A, int left, int mid, int right)
         else
             A[k++] = R[j++];
     }
-    while (i < n1)
-        A[k++] = L[i++];
-    while (j < n2)
-        A[k++] = R[j++];
+    // while (i < n1)
+    //     A[k++] = L[i++];
+    // while (j < n2)
+    //     A[k++] = R[j++];
+    memcpy(A + k, L + i, (n1 - i) * sizeof(int));
+    memcpy(A + k, R + j, (n2 - j) * sizeof(int));
     delete[] L;
     delete[] R;
 }
