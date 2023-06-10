@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <time.h>
 #include <vector>
+#include <unistd.h>
 using namespace std;
 
 template <typename T>
