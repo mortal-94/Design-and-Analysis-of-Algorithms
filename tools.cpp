@@ -31,6 +31,14 @@ public:
         cout << endl;
     }
 
+    static void print2dArray(T **arr, int n, int m)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            printArray(arr[i], m);
+        }
+    }
+
     // 判断两个数组arr1和arr2的前n个元素是否相等
     static bool isEqual(T *arr1, T *arr2, int n)
     {
