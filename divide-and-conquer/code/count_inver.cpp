@@ -5,6 +5,7 @@ int MergeCount(int *A, int left, int mid, int right)
 {
     int *A1 = new int[right - left + 1];
     memcpy(A1, A + left, (right - left + 1) * sizeof(int)); // 保留A[left, mid]的副本
+    // A1[0, right - left] = A[left, right]，即偏移量为left
     int i = 0, j = mid - left + 1, k = 0, count = 0;
     while (i <= mid - left && j <= right - left)
     {
@@ -20,16 +21,18 @@ int MergeCount(int *A, int left, int mid, int right)
             j++, k++;
         }
     }
-    while (i <= mid - left)
-    {
-        A[left + k] = A1[i];
-        i++, k++;
-    }
-    while (j <= right - left)
-    {
-        A[left + k] = A1[j];
-        j++, k++;
-    }
+    // while (i <= mid - left)
+    // {
+    //     A[left + k] = A1[i];
+    //     i++, k++;
+    // }
+    // while (j <= right - left)
+    // {
+    //     A[left + k] = A1[j];
+    //     j++, k++;
+    // }
+    memcpy(A + left + k, A1 + i, (mid - left - i + 1) * sizeof(int));   // A[left+k, right] = A1[i, mid-left]
+    memcpy(A + left + k, A1 + j, (right - left - j + 1) * sizeof(int)); // A[left+k, right] = A1[j, right-left]
     delete[] A1;
     return count;
 }
