@@ -2,24 +2,23 @@
 
 int Partition(int *A, int left, int right)
 {
-    // 随机选取一个数作为基准数
-    int pivot = A[left + rand() % (right - left + 1)];
-    int i = left, j = right;
-    while (i <= j)
+    // 随机选取基准元素放到A[right]做为基准元素
+    srand(time(NULL));
+    int pivotIdx = rand() % (right - left + 1) + left;
+    swap(A[right], A[pivotIdx]);
+    int i = left - 1, pivot = A[right];
+    // i及i左边的元素都小于等于pivot，i右边的元素都大于pivot
+    for (int j = left; j < right; j++)
     {
-        while (A[i] < pivot) // 左边找大的
-            i++;
-        while (A[j] > pivot) // 右边找小的
-            j--;
-        if (i <= j)
+        if (A[j] <= pivot)
         {
-            swap(A[i], A[j]);
+            swap(A[i + 1], A[j]);
             i++;
-            j--;
         }
     }
-    // 此时i=j+1
-    return j;
+    // A[right]是等于pivot的元素，所以将其放到i+1的位置，然后返回i+1
+    swap(A[i + 1], A[right]);
+    return i + 1;
 }
 
 // 对数组A的片段A[left, right]进行快速排序
@@ -28,24 +27,38 @@ void QucikSort(int *A, int left, int right)
     if (left < right)
     {
         int p = Partition(A, left, right);
-        QucikSort(A, left, p);
+        QucikSort(A, left, p - 1);
         QucikSort(A, p + 1, right);
     }
 }
 
+void check()
+{
+    int num = 100;
+    int size = 15, minValue = -100, maxValue = 100;
+    for (int i = 0; i < num; i++)
+    {
+        int *arr = ArrayUtils<int>::generateRandomArray(size, minValue, maxValue);
+        int *stdArr = new int[size];
+        memcpy(stdArr, arr, size * sizeof(int));
+        sort(stdArr, stdArr + size);
+        QucikSort(arr, 0, size - 1);
+        assert(ArrayUtils<int>::isEqual(arr, stdArr, size));
+        delete[] arr, stdArr;
+    }
+    cout << "Passed!" << endl;
+}
+
 int main()
 {
+    check();
     int size = 15, minValue = -100, maxValue = 100;
     int *arr = ArrayUtils<int>::generateRandomArray(size, minValue, maxValue);
-    int *stdArr = new int[size];
-    memcpy(stdArr, arr, size * sizeof(int));
     cout << "Before sort: ";
     ArrayUtils<int>::printArray(arr, size);
-    sort(stdArr, stdArr + size);
     QucikSort(arr, 0, size - 1);
-    assert(ArrayUtils<int>::isEqual(arr, stdArr, size));
     cout << "After sort: ";
     ArrayUtils<int>::printArray(arr, size);
-    delete[] arr, stdArr;
+    delete[] arr;
     return 0;
 }

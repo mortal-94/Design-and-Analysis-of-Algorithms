@@ -2,24 +2,23 @@
 
 int Partition(int *A, int left, int right)
 {
-    // 随机选取一个数作为基准数
-    int pivot = A[left + rand() % (right - left + 1)];
-    int i = left, j = right;
-    while (i <= j)
+    // 随机选取基准元素放到A[right]做为基准元素
+    srand(time(NULL));
+    int pivotIdx = rand() % (right - left + 1) + left;
+    swap(A[right], A[pivotIdx]);
+    int i = left - 1, pivot = A[right];
+    // i及i左边的元素都小于等于pivot，i右边的元素都大于pivot
+    for (int j = left; j < right; j++)
     {
-        while (A[i] < pivot) // 左边找大的
-            i++;
-        while (A[j] > pivot) // 右边找小的
-            j--;
-        if (i <= j)
+        if (A[j] <= pivot)
         {
-            swap(A[i], A[j]);
+            swap(A[i + 1], A[j]);
             i++;
-            j--;
         }
     }
-    // 此时i=j+1
-    return j;
+    // A[right]是等于pivot的元素，所以将其放到i+1的位置，然后返回i+1
+    swap(A[i + 1], A[right]);
+    return i + 1;
 }
 
 // 返回数组A[left, right]中第k小的数
@@ -32,7 +31,7 @@ int OrderSlect(int *A, int left, int right, int k)
     }
     else if (p - left + 1 > k)
     {
-        return OrderSlect(A, left, p, k);
+        return OrderSlect(A, left, p - 1, k);
     }
     else
     {
