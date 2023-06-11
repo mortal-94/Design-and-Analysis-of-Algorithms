@@ -5,6 +5,7 @@
 #include <time.h>
 #include <vector>
 #include <unistd.h>
+#include <numeric>
 using namespace std;
 
 template <typename T>
