@@ -6,6 +6,7 @@
 #include <vector>
 #include <unistd.h>
 #include <numeric>
+#include <queue>
 using namespace std;
 
 template <typename T>
