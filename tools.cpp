@@ -61,5 +61,14 @@ public:
                 return false;
         }
         return true;
-    }    
+    }
+};
+
+template <typename T>
+struct BNode
+{
+    T val;
+    BNode *left;
+    BNode *right;
+    BNode(T x) : val(x), left(NULL), right(NULL) {}
 };
