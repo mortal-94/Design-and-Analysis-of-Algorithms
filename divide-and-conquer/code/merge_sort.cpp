@@ -49,9 +49,9 @@ int main()
     int size = 15, minValue = -100, maxValue = 100;
     vector<int> arr = ArrayUtils<int>::generateRandomArray(size, minValue, maxValue);
     cout << "Before sort: ";
-    ArrayUtils<int>::printArray(arr, size);
+    ArrayUtils<int>::printArray(arr);
     MergeSort(arr, 0, size - 1);
     cout << "After sort: ";
-    ArrayUtils<int>::printArray(arr, size);
+    ArrayUtils<int>::printArray(arr);
     return 0;
 }

@@ -41,7 +41,7 @@ int main()
     int size = 5, minValue = -100, maxValue = 100;
     vector<int> arr = ArrayUtils<int>::generateRandomArray(size, minValue, maxValue);
     cout << "Array: ";
-    ArrayUtils<int>::printArray(arr, size);
+    ArrayUtils<int>::printArray(arr);
     int maxSum = MaxSubArray(arr);
     cout << "Max sub array sum: " << maxSum << endl; // TODO 检验答案的正确性
     return 0;

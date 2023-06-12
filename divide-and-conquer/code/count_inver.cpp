@@ -44,10 +44,10 @@ int main()
     int size = 5, minValue = -100, maxValue = 100;
     vector<int> arr = ArrayUtils<int>::generateRandomArray(size, minValue, maxValue);
     cout << "Array: ";
-    ArrayUtils<int>::printArray(arr, size);
+    ArrayUtils<int>::printArray(arr);
     int count = CountInver(arr, 0, size - 1);
     cout << "Inversion count: " << count << endl;
     cout << "Array: ";
-    ArrayUtils<int>::printArray(arr, size);
+    ArrayUtils<int>::printArray(arr);
     return 0;
 }

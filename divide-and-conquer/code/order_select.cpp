@@ -44,13 +44,13 @@ int main()
     int size = 15, minValue = -100, maxValue = 100;
     vector<int> arr = ArrayUtils<int>::generateRandomArray(size, minValue, maxValue);
     cout << "original array: ";
-    ArrayUtils<int>::printArray(arr, size);
+    ArrayUtils<int>::printArray(arr);
     vector<int> stdArr(arr);
     int k = 5;
     int x = OrderSlect(arr, 0, size - 1, k);
     sort(stdArr.begin(), stdArr.end());
     cout << "sorted array: ";
-    ArrayUtils<int>::printArray(stdArr, size);
+    ArrayUtils<int>::printArray(stdArr);
     assert(x == stdArr[k - 1]);
     cout << "The " << k << "th smallest number is " << x << endl;
     return 0;

@@ -34,11 +34,11 @@ public:
         }
         cout << endl;
     }
-    // 打印前n个元素
-    static void printArray(vector<T> arr, int n)
+    // 打印[l,r)的元素
+    static void printArray(vector<T> arr, int l, int r)
     {
-        assert(n <= arr.size());
-        for (int i = 0; i < n; i++)
+        assert(r - l + 1 <= arr.size());
+        for (int i = l; i < r; i++)
         {
             cout << arr[i] << " ";
         }
