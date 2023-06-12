@@ -73,3 +73,56 @@ struct BNode
     BNode *right;
     BNode(T x) : val(x), left(NULL), right(NULL) {}
 };
+
+// 并查集
+class UnionFind
+{
+private:
+    vector<int> parent;
+    vector<int> rank; // rank[i]表示以i为根的集合所表示的树的层数
+    int count;
+
+public:
+    UnionFind(int n)
+    {
+        count = n;
+        parent = vector<int>(n);
+        rank = vector<int>(n, 1);
+        for (int i = 0; i < n; i++)
+        {
+            parent[i] = i;
+        }
+    }
+
+    int find(int p)
+    {
+        assert(p >= 0 && p < count);
+        while (p != parent[p])
+        {
+            parent[p] = parent[parent[p]]; // 路径压缩
+            p = parent[p];
+        }
+        return p;
+    }
+
+    void unionElements(int p, int q) // 按秩合并
+    {
+        int pRoot = find(p);
+        int qRoot = find(q);
+        if (pRoot == qRoot)
+            return;
+        if (rank[pRoot] < rank[qRoot])
+        {
+            parent[pRoot] = qRoot;
+        }
+        else if (rank[pRoot] > rank[qRoot])
+        {
+            parent[qRoot] = pRoot;
+        }
+        else
+        {
+            parent[pRoot] = qRoot;
+            rank[qRoot]++;
+        }
+    }
+};
