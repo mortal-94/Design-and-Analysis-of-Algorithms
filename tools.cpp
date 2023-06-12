@@ -140,4 +140,8 @@ struct Edge
     {
         return weight < e.weight;
     }
+    bool operator>(const Edge &e) const
+    {
+        return weight > e.weight;
+    }
 };
