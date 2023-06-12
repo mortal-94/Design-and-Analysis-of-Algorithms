@@ -126,3 +126,14 @@ public:
         }
     }
 };
+
+// 边结构
+template <typename T>
+struct Edge
+{
+    int a, b;
+    T weight;
+    Edge() {}
+    Edge(int a, int b) : a(a), b(b) {}
+    Edge(int a, int b, T weight) : a(a), b(b), weight(weight) {}
+};
