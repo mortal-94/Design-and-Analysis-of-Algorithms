@@ -136,4 +136,8 @@ struct Edge
     Edge() {}
     Edge(int a, int b) : a(a), b(b) {}
     Edge(int a, int b, T weight) : a(a), b(b), weight(weight) {}
+    bool operator<(const Edge &e) const
+    {
+        return weight < e.weight;
+    }
 };
