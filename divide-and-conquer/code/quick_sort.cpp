@@ -22,7 +22,7 @@ int Partition(vector<int> &A, int left, int right)
 // 对数组A的片段A[left, right]进行快速排序
 void QucikSort(vector<int> &A, int left, int right)
 {
-    if (left < right)
+    if (left <= right)
     {
         int p = Partition(A, left, right);
         QucikSort(A, left, p - 1);
