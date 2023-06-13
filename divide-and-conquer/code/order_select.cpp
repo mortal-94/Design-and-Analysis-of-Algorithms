@@ -8,7 +8,7 @@ int Partition(vector<int> &A, int left, int right)
     swap(A[right], A[pivotIdx]);
     int i = left - 1, pivot = A[right];
     // i及i左边的元素都小于等于pivot，i右边的元素都大于pivot
-    for (int j = left; j < right; j++)
+    for (int j = left; j <= right; j++)
     {
         if (A[j] <= pivot)
         {
@@ -16,9 +16,7 @@ int Partition(vector<int> &A, int left, int right)
             i++;
         }
     }
-    // A[right]是等于pivot的元素，所以将其放到i+1的位置，然后返回i+1
-    swap(A[i + 1], A[right]);
-    return i + 1;
+    return i;
 }
 
 // 返回数组A[left, right]中第k小的数
