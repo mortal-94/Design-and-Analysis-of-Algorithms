@@ -1,6 +1,8 @@
 # Design-and-Analysis-of-Algorithms
 记录算法设计与分析课程的学习
 
+建议下载浏览，GitHub的markdown渲染和我用的typora不太相符。
+
 - [分而治之.md](divide-and-conquer/分而治之.md)  
 
 - [动态规划.md](dynamic-programming/动态规划.md) 
